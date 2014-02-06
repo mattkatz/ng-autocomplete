@@ -1,4 +1,8 @@
 #angular autocomplete
+I'm just getting started on this - it doesn't work yet. 
+I'm creating this directive because I want to do tagging on Orbital Feed Reader and it seems like a tagging input is a clear option for a directive.  
+
+I'm trying out test driven development on this and probably making a complete hash of it. Any help is greatly appreciated!
 
 #How should it work
 
