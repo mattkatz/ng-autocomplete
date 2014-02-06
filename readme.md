@@ -25,3 +25,8 @@ Default of "," but we can concatenate with anything
 
 ## minLength
 default of 2 characters before we do anything
+
+
+# Use this however you want
+This code is released into the great public domain. 
+If you make changes, please contribute them back. Don't be a jerk.
