@@ -14,8 +14,10 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      '../js/autocomplete-directive.*',
       '../lib/angular.js',
+      '../js/autocomplete-directive.*',
+      '../spec/angular-mocks.js',
+
     ],
 
 
