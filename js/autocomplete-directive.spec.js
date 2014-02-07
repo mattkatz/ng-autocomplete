@@ -25,7 +25,7 @@ describe("Autocomplete-directive", function(){
   it("should create a textbox", function(){
     //compile the directive, there should be a textbox
     template = $compile(html)($scope);
-    $scope.digest();
+    $scope.$digest();
     //Render the template as a string
     var templateAsHtml = template.html();
     expect(templateAsHtml).toContain("input");
