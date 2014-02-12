@@ -22,20 +22,33 @@ describe("Autocomplete-directive", function(){
 
    });*/
   });
-  it("should create a textbox", function(){
+  it("should create a textbox input", function(){
     //compile the directive, there should be a textbox
     template = $compile(html)($scope);
     $scope.$digest();
     //Render the template as a string
     var templateAsHtml = template.html();
     expect(templateAsHtml).toContain("input");
-
-    //expect( false).toBeTruthy();
   });
   describe("when given an array as the lookup source", function(){
+    template = '';
+    var elem;
+    beforeEach(function(){
+      html = "<mk-autocomplete ng-model='tags' suggestions='availableTags'></mk-autocomplent>";
+      $scope.tags = [];
+      $scope.availableTags = ["art","arms","tools","toons", "topology","torpor"];
+      elem = angular.element(html);
+      template = $compile(html)($scope);
+      $scope.$digest();
+    });
     //add characters to the input
-    xit("should suggest items that meet the criteria", function(){
-      expect( false).toBeTruthy();
+    it("should suggest items that meet the criteria", function(){
+      //elem.value = 'ar';
+      console.log(elem);
+      elem.sendKeys('ar');
+      $scope.$digest();
+      expect($scope.currentSuggestions).toContain("art");
+      expect($scope.currentSuggestions).toContain("arms");
 
     });
     xit("should not suggest items that don't meet the criteria", function(){
