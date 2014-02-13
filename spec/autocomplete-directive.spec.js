@@ -1,3 +1,6 @@
+//currently broken as I figure out the diff between 
+//protractor e2e tests and unit tests.
+//this is for unit tests
 describe("Autocomplete-directive", function(){
   var $compile,$rootScope;
   var $scope;
@@ -42,10 +45,11 @@ describe("Autocomplete-directive", function(){
       $scope.$digest();
     });
     //add characters to the input
-    it("should suggest items that meet the criteria", function(){
+    xit("should suggest items that meet the criteria", function(){
       //elem.value = 'ar';
       console.log(elem);
-      elem.sendKeys('ar');
+      //elem.sendKeys('ar');
+      //unit tests should just input a test string and resolve it
       $scope.$digest();
       expect($scope.currentSuggestions).toContain("art");
       expect($scope.currentSuggestions).toContain("arms");

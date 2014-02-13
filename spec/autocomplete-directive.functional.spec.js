@@ -1,3 +1,4 @@
+//currently broken bc I didn't understand that protractor is for e2e and plain jasmine is for unit
 describe("Autocomplete-directive", function(){
   var $compile,$rootScope;
   var $scope;
