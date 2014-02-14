@@ -3,6 +3,11 @@
 <script type='text/javascript' src='lib/angular.js'></script>
 <script type='text/javascript' src='js/app.js'></script>
 <script type='text/javascript' src='js/autocomplete-directive.js'></script>
+<style type='text/css'>
+  .selected {
+    background:red;
+  }
+</style>
 </head>
 <body >
 WHY DOES NOTHING SHOW
@@ -10,6 +15,12 @@ WHY DOES NOTHING SHOW
     Demo coming real soon now
     <mk-autocomplete id='autosuggest' suggestions='tagSource' ng-model='tags'></mk-autocomplete>
 
+  </div>
+  <div data-ng-controller="tagsCtrl2" class="datasource">
+    <input data-ng-change="processChange()" data-ng-keypress="processKey($event)"  data-ng-model="inputValue"/>
+    <ul  class="suggestions">
+      <li class="suggestion" data-ng-repeat="suggestion in suggestions" data-ng-class="{selected: suggestion == currentResult}">{{suggestion}}</li>
+    </uL>
   </div>
 </body>
 
