@@ -6,8 +6,15 @@ var demo = angular.module('autocompleteDemo',[])
   $scope.selectClass = 'selected';
   $scope.processChange = function(){
     $scope.suggestions = [];
-    if($scope.inputValue.length >= $scope.minLength){
-      $scope.suggestions = $scope.getSuggestions($scope.inputValue,$scope.suggestionSource);
+    var q = $scope.inputValue.trim();
+    if($scope.multiple){
+      var multipleSepPos = q.lastIndexOf($scope.multipleSeparator);
+      if(multipleSepPos != -1){
+        q = $scope.inputValue.substr(multipleSepPos + $scope.multipleSeparator.length).trim();
+      }
+    }
+    if(q.length >= $scope.minLength){
+      $scope.suggestions = $scope.getSuggestions(q,$scope.suggestionSource);
     }
   };
   $scope.currentResult = null;
