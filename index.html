@@ -22,12 +22,6 @@ WHY DOES NOTHING SHOW
     <mk-autocomplete id='autosuggest' data-suggestion-source='tagSource' data-ng-model='tags' data-min-length='4'></mk-autocomplete>
 
   </div>
-  <div data-ng-controller="tagsCtrl2" class="datasource">
-    <input data-ng-change="processChange()" data-ng-keypress="processKey($event)"  data-ng-model="inputValue"/>
-    <ul  class="suggestions">
-      <li class="suggestion" data-ng-repeat="suggestion in suggestions" data-ng-class="{selected: suggestion == currentResult}">{{suggestion}}</li>
-    </uL>
-  </div>
 </body>
 
 </html>
