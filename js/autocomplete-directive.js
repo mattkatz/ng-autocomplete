@@ -10,7 +10,7 @@ angular.module('autocomplete-directive',[])
     //replace: "true",//this breaks my find an input test
     template:
       '<div class="autocomplete"><input placeholder="begin typing to get suggestions" data-ng-change="processChange()" data-ng-keypress="processKey($event)" data-ng-model="inputValue" autocomplete="off"/> '+
-      '<ul  class="suggestions">'+
+      '<ul  class="suggestions" ng-show="suggestions">'+
         '<li class="suggestion" data-ng-repeat="suggestion in suggestions" data-ng-class="suggestion == currentResult ? selectClass: null">{{suggestion}}</li>' +
       '</uL></div>',
 

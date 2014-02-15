@@ -5,15 +5,31 @@
 <script type='text/javascript' src='js/autocomplete-directive.js'></script>
 <style type='text/css'>
   .selected {
-    background:red;
+    background:#F0F0B8;
   }
   .blueselected{
-    background:blue;
+    background:#b8d8f2;
+  }
+  .autocomplete > .suggestions {
+    position: relative;
+    bottom: 2px;
+    left: 2px;
+    background: white;
+    border: 1px solid #808080;
+    list-style: none outside none;
+    margin: 0;
+    padding: 2px;
+    width: -moz-fit-content;
+    width: -webkit-fit-content;
+    width: fit-content;
+    z-index:1000;
+
+
   }
 </style>
 </head>
 <body >
-WHY DOES NOTHING SHOW
+  <h1>Angular tag Autocompleter</h1>
   <div  data-ng-controller='tagsCtrl' class="datasource">
     Autocompleting in angular should be pretty easy, no? I wrote this so that I could have an easy way to mimic the tagging function in WordPress in <a href="http://mattkatz.github.io/Orbital-Feed-Reader">Orbital Feed Reader</a>.
     <p>The simplest thing is to give a data-suggestion-source of an array and a model to store the value in.</p>
