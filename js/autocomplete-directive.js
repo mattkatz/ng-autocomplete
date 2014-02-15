@@ -89,12 +89,20 @@ angular.module('autocomplete-directive',[])
       scope.processKey = function(event){
         var enter = 13, tab = 9, esc = 27, up = 38, down = 40, left = 37, right = 39;
         //cancel other handlers if we've got it
-        if([enter,tab,esc,up,down].indexOf(event.keyCode) != -1){
+        //if up/down/escape and we have results
+        //or if enter/tab and we have results and one has been selected
+        if((scope.suggestions.length >0) && ([enter,tab,esc,up,down].indexOf(event.keyCode) != -1) &&
+          (([enter,tab].indexOf(event.keyCode) ==-1)|| scope.currentResult)){
             if(event.stopImmediatePropagation) event.stopImmediatePropagation();
             if(event.preventDefault) event.preventDefault();
             if(event.stopPropagation) event.stopPropagation();
             if(event.cancelBubble) event.cancelBubble = true;
+        }else{
+          scope.currentResult = null;
+          scope.suggestions = [];
+          return;
         }
+        
         switch(event.keyCode){
           case up:
             scope.prevResult();
