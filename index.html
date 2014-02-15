@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>ng-autocomplete by mattkatz</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>ng-autocomplete</h1>
+        <p>An autocomplete tagging directive</p>
+
+        <p class="view"><a href="https://github.com/mattkatz/ng-autocomplete">View the Project on GitHub <small>mattkatz/ng-autocomplete</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/mattkatz/ng-autocomplete/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/mattkatz/ng-autocomplete/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/mattkatz/ng-autocomplete">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="angular-autocomplete" class="anchor" href="#angular-autocomplete"><span class="octicon octicon-link"></span></a>angular autocomplete</h1>
+
+<p>I'm creating this directive because I want to do tagging on <a href="https://mattkatz.github.io/Orbital-Feed-Reader">Orbital Feed Reader</a> and it seems like a tagging input is a clear option for a directive. It should behave pretty similar to how suggest.js works in WordPress.</p>
+
+<p>I'm trying out test driven development on this and probably making a complete hash of it. Any help is greatly appreciated!</p>
+
+<h1>
+<a name="how-should-it-work" class="anchor" href="#how-should-it-work"><span class="octicon octicon-link"></span></a>How should it work</h1>
+
+<p><code>&lt;mk-autocomplete data-ng-model="tags" data-suggestion-source="availableTags" multiple="true" data-multiple-separator="," data-min-length="2" data-select-class="selected"/&gt;</code></p>
+
+<h2>
+<a name="ng-model" class="anchor" href="#ng-model"><span class="octicon octicon-link"></span></a>ng-model</h2>
+
+<p>Stores accepted suggestions in ng-model. As someone types, nothing affects ng-model till they either accept a suggestion or type the multiple separator. If acceptMultiple is false, stores everything.</p>
+
+<h2>
+<a name="onaccept---not-working-yet-still-todo" class="anchor" href="#onaccept---not-working-yet-still-todo"><span class="octicon octicon-link"></span></a>onAccept - not working yet, still todo</h2>
+
+<p>triggers when user does any of the accept actions: tab, enters multiple sep, hits down/up arrows and then enter.</p>
+
+<h2>
+<a name="suggestionsource" class="anchor" href="#suggestionsource"><span class="octicon octicon-link"></span></a>suggestionSource</h2>
+
+<p>accepts an array.
+Todo: pass in a function that accepts 0 or 1 parameters. The function will be passed the current fragment</p>
+
+<h2>
+<a name="multiple" class="anchor" href="#multiple"><span class="octicon octicon-link"></span></a>multiple</h2>
+
+<p>Should we accept multiples?</p>
+
+<h2>
+<a name="multipleseparator" class="anchor" href="#multipleseparator"><span class="octicon octicon-link"></span></a>multipleSeparator</h2>
+
+<p>Default of "," but we can concatenate with anything</p>
+
+<h2>
+<a name="minlength" class="anchor" href="#minlength"><span class="octicon octicon-link"></span></a>minLength</h2>
+
+<p>default of 2 characters before we do anything</p>
+
+<h2>
+<a name="selectclass" class="anchor" href="#selectclass"><span class="octicon octicon-link"></span></a>selectClass</h2>
+
+<p>Default is "selected" but you can pass in whatever you like.</p>
+
+<h1>
+<a name="use-this-however-you-want" class="anchor" href="#use-this-however-you-want"><span class="octicon octicon-link"></span></a>Use this however you want</h1>
+
+<p>This code is released into the great public domain. 
+If you make changes, please contribute them back. Don't be a jerk.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/mattkatz">mattkatz</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
