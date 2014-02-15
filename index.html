@@ -7,6 +7,9 @@
   .selected {
     background:red;
   }
+  .blueselected{
+    background:blue;
+  }
 </style>
 </head>
 <body >
@@ -21,6 +24,8 @@ WHY DOES NOTHING SHOW
     <p>By default, the min-length before suggestions start appearing is 2 characters. Here min-length is 4. Try typing in "poli".</p>
     <mk-autocomplete id='autosuggest' data-suggestion-source='tagSource' data-ng-model='tags' data-min-length='4'></mk-autocomplete>
 
+    <p>You can specify a specific css class for the selected item. Here we'll change from the default of 'selected' to blueselected</p>
+    <mk-autocomplete id='autosuggest' data-suggestion-source='tagSource' data-ng-model='tags' data-select-class='blueselected'></mk-autocomplete>
   </div>
 </body>
 

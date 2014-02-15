@@ -2,22 +2,23 @@ angular.module('autocomplete-directive',[])
 .directive('mkAutocomplete', function(){
   return {
     restrict: 'EA',
+    replace: true,
     scope: {
       ngModel: "=",
       suggestionSource: "=",
     },
     //replace: "true",//this breaks my find an input test
     template:
-      '<input placeholder="begin typing to get suggestions" data-ng-change="processChange()" data-ng-keypress="processKey($event)" data-ng-model="inputValue" autocomplete="off"/> '+
+      '<div class="autocomplete"><input placeholder="begin typing to get suggestions" data-ng-change="processChange()" data-ng-keypress="processKey($event)" data-ng-model="inputValue" autocomplete="off"/> '+
       '<ul  class="suggestions">'+
-        '<li class="suggestion" data-ng-repeat="suggestion in suggestions" data-ng-class="{selected: suggestion == currentResult}">{{suggestion}}</li>' +
-      '</uL>',
+        '<li class="suggestion" data-ng-repeat="suggestion in suggestions" data-ng-class="suggestion == currentResult ? selectClass: null">{{suggestion}}</li>' +
+      '</uL></div>',
 
     link: function(scope,element, attrs, controller) {
       scope.minLength = attrs.minLength || 2;
       scope.multiple = attrs.multiple || true;
       scope.multipleSeparator = attrs.multipleSeparator ||", ";
-      //scope.selectClass = 'selected';
+      scope.selectClass = attrs.selectClass ||'selected' ;
       scope.processChange = function(){
         scope.suggestions = [];
         var q = scope.inputValue.trim();
