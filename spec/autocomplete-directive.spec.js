@@ -36,32 +36,33 @@ describe("Autocomplete-directive", function(){
   describe("when given an array as the lookup source", function(){
     template = '';
     var elem;
+    values = [];
+    input = "ar";
     beforeEach(function(){
-      html = "<mk-autocomplete ng-model='tags' suggestions='availableTags'></mk-autocomplent>";
-      $scope.tags = [];
-      $scope.availableTags = ["art","arms","tools","toons", "topology","torpor"];
-      elem = angular.element(html);
+      $scope.source = ["art","arms","tools","toons", "topology","torpor"];
+      $scope.tags = ''
+      newhtml = "<mk-autocomplete ng-model='tags' data-suggestion-source='source'></mk-autocomplete>";
+      elem = angular.element(newhtml);
       template = $compile(html)($scope);
       $scope.$digest();
     });
     //add characters to the input
-    xit("should suggest items that meet the criteria", function(){
-      //elem.value = 'ar';
-      console.log(elem);
-      //elem.sendKeys('ar');
+    it("should suggest items that meet the criteria", function(){
       //unit tests should just input a test string and resolve it
+      elem.find('input').val('ar')
+      $scope.tags = "ar";
       $scope.$digest();
-      expect($scope.currentSuggestions).toContain("art");
-      expect($scope.currentSuggestions).toContain("arms");
-
+      $scope.$apply();
+      values = elem.find('li').text();
+      //values = template.getSuggestions(input,$scope.availableTags);
+      expect(values).toContain("art");
+      expect(values).toContain("arms");
     });
     xit("should not suggest items that don't meet the criteria", function(){
       expect( false).toBeTruthy();
-
     });
     xit("should return no suggestions if an unfamiliar item gets presented", function(){
       expect( false).toBeTruthy();
-
     });
   });
 
