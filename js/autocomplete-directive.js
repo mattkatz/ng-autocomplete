@@ -7,7 +7,7 @@ angular.module('autocomplete-directive',[])
       ngModel: "=",
       suggestionSource: "=",
     },
-    //replace: "true",//this breaks my find an input test
+    replace: "true",//this breaks my find an input test
     template:
       '<div class="autocomplete"><input placeholder="begin typing to get suggestions" data-ng-change="processChange()" data-ng-keypress="processKey($event)" data-ng-model="inputValue" autocomplete="off"/> '+
       '<ul  class="suggestions" ng-show="suggestions">'+
@@ -50,7 +50,6 @@ angular.module('autocomplete-directive',[])
           if(scope.multiple){
             if(scope.inputValue.indexOf(scope.multipleSeparator) != -1){
               currentVal = scope.inputValue.substr(0,(scope.inputValue.lastIndexOf(scope.multipleSeparator) + scope.multipleSeparator.length));
-
             }else{
               currentVal = "";
             }
@@ -63,7 +62,6 @@ angular.module('autocomplete-directive',[])
           scope.currentResult = null;
           //TODO fire an onselsect event
         }
-
       };
       scope.nextResult = function(){
         if(scope.currentResult){
@@ -103,7 +101,6 @@ angular.module('autocomplete-directive',[])
           scope.suggestions = [];
           return;
         }
-        
         switch(event.keyCode){
           case up:
             scope.prevResult();
