@@ -35,8 +35,9 @@
     <p>The simplest thing is to give a data-suggestion-source of an array and a model to store the value in.</p>
     <p>Here the array is: [<span data-ng-repeat="item in tagSource">"{{item}}",</span>] </p>
     <mk-autocomplete id='autosuggest' data-suggestion-source='tagSource' data-ng-model='tags' ></mk-autocomplete>
+    And the model ends up being: {{tags}}
     <p>You can change the multiple-separator from the default of ", " to something like "|"</p>
-    <mk-autocomplete id='autosuggest' data-suggestion-source='tagSource' data-ng-model='tags' data-multiple-separator='|'></mk-autocomplete>
+    <mk-autocomplete id='autosuggest' data-suggestion-source='tagSource' ng-model='tags' data-multiple-separator='|'></mk-autocomplete>
     <p>By default, the min-length before suggestions start appearing is 2 characters. Here min-length is 4. Try typing in "poli".</p>
     <mk-autocomplete id='autosuggest' data-suggestion-source='tagSource' data-ng-model='tags' data-min-length='4'></mk-autocomplete>
 
