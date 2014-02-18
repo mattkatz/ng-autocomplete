@@ -1,18 +1,45 @@
 <!doctype html>
-<html>
+<html data-ng-app="autocompleteDemo">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>ng-autocomplete by mattkatz</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
+     <style type='text/css'>
+      .selected {
+        background:#F0F0B8;
+      }
+      .blueselected{
+        background:#b8d8f2;
+      }
+      .autocomplete > .suggestions {
+        position: relative;
+        bottom: 2px;
+        left: 2px;
+        background: white;
+        border: 1px solid #808080;
+        list-style: none outside none;
+        margin: 0;
+        padding: 2px;
+        width: -moz-fit-content;
+        width: -webkit-fit-content;
+        width: fit-content;
+        z-index:1000;
+
+
+      }
+    </style>   
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script type='text/javascript' src='javascripts/angular.js'></script>
+    <script type='text/javascript' src='javascripts/autocomplete-directive.js'></script>
+    <script type='text/javascript' src='javascripts/app.js'></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body data-ng-controller="tagsCtrl">
     <div class="wrapper">
       <header>
         <h1>ng-autocomplete</h1>
@@ -31,59 +58,79 @@
         <h1>
 <a name="angular-autocomplete" class="anchor" href="#angular-autocomplete"><span class="octicon octicon-link"></span></a>angular autocomplete</h1>
 
-<p>I'm creating this directive because I want to do tagging on <a href="https://mattkatz.github.io/Orbital-Feed-Reader">Orbital Feed Reader</a> and it seems like a tagging input is a clear option for a directive. It should behave pretty similar to how suggest.js works in WordPress.</p>
+<p>I'm creating this directive because I want to do tagging on <a href="https://mattkatz.github.io/Orbital-Feed-Reader"title="an RSS/ATOM Feed Reader plugin for WordPress">Orbital Feed Reader</a> and it seems like a tagging input is a clear option for a directive. It should behave pretty similar to how <a href="http://core.svn.wordpress.org/trunk/wp-includes/js/jquery/suggest.js">suggest.js</a> works in WordPress.</p>
 
-<p>I'm trying out test driven development on this and probably making a complete hash of it. Any help is greatly appreciated!</p>
 
 <h1>
 <a name="how-should-it-work" class="anchor" href="#how-should-it-work"><span class="octicon octicon-link"></span></a>How should it work</h1>
 
-<p><code>&lt;mk-autocomplete data-ng-model="tags" data-suggestion-source="availableTags" multiple="true" data-multiple-separator="," data-min-length="2" data-select-class="selected"/&gt;</code></p>
+<p>The simplest thing is to give a data-suggestion-source of an array and a model to store the value in.</p>
+<p>Here the array is:</p>
+<p> <code>tagSource = [<span data-ng-repeat="item in tagSource">"{{item}}",</span>];</code></p>
+<p><code>&lt;mk-autocomplete data-ng-model="tags" data-suggestion-source="tagSource" multiple="true" data-multiple-separator="," data-min-length="2" data-select-class="selected"/&gt;</code></p>
 
-<h2>
-<a name="ng-model" class="anchor" href="#ng-model"><span class="octicon octicon-link"></span></a>ng-model</h2>
+Try typing 'po' or 'lo' into this example. Use the arrow keys to go up or down, use enter or tab to select an option
+<mk-autocomplete ng-model="tags" data-suggestion-source="tagSource" multiple="true" data-multiple-separator="," data-min-length="2" data-select-class="selected"></mk-autocomplete>
 
-<p>Stores accepted suggestions in ng-model. As someone types, nothing affects ng-model till they either accept a suggestion or type the multiple separator. If acceptMultiple is false, stores everything.</p>
+<h2> <a name="ng-model" class="anchor" href="#ng-model"><span class="octicon octicon-link"></span></a>ng-model</h2>
 
-<h2>
-<a name="onaccept---not-working-yet-still-todo" class="anchor" href="#onaccept---not-working-yet-still-todo"><span class="octicon octicon-link"></span></a>onAccept - not working yet, still todo</h2>
+<p>Stores accepted suggestions in ng-model. Right now it's just connected as a string, you have to parse things into an array if that's what you want. </p>
+<div ng-show="tags">Now your ng-model contains <span>{{tags}}</span></div>
 
-<p>triggers when user does any of the accept actions: tab, enters multiple sep, hits down/up arrows and then enter.</p>
+<h2><a name="suggestionsource" class="anchor" href="#suggestionsource"><span class="octicon octicon-link"></span></a>suggestionSource</h2>
 
-<h2>
-<a name="suggestionsource" class="anchor" href="#suggestionsource"><span class="octicon octicon-link"></span></a>suggestionSource</h2>
-
-<p>accepts an array.
-Todo: pass in a function that accepts 0 or 1 parameters. The function will be passed the current fragment</p>
+<p>accepts an array.</p>
+<p>Not yet done: <strike>pass in a function that accepts 0 or 1 parameters. The function will be passed the current fragment</strike></p>
 
 <h2>
 <a name="multiple" class="anchor" href="#multiple"><span class="octicon octicon-link"></span></a>multiple</h2>
 
-<p>Should we accept multiples?</p>
+<p>Should we accept multiples? Default is true.</p>
 
 <h2>
 <a name="multipleseparator" class="anchor" href="#multipleseparator"><span class="octicon octicon-link"></span></a>multipleSeparator</h2>
 
-<p>Default of "," but we can concatenate with anything</p>
+<p>You can change the multiple-separator from the default of ", " to something like "|"</p>
+<code>
+    &lt;mk-autocomplete id='autosuggest' data-suggestion-source='tagSource' data-ng-model='tags' data-multiple-separator='|'&gt;&lt;/mk-autocomplete&gt;
+</code>
+    <mk-autocomplete id='autosuggest' data-suggestion-source='tagSource' data-ng-model='tags' data-multiple-separator='|'></mk-autocomplete>
 
 <h2>
 <a name="minlength" class="anchor" href="#minlength"><span class="octicon octicon-link"></span></a>minLength</h2>
 
-<p>default of 2 characters before we do anything</p>
+    <p>By default, the min-length before suggestions start appearing is 2 characters. Here min-length is 4. Try typing in "poli".</p>
+    <code>
+      &lt;mk-autocomplete id='autosuggest' data-suggestion-source='tagSource' data-ng-model='tags' data-min-length='4'&gt;&lt;/mk-autocomplete&gt;
+    </code>
+    <mk-autocomplete id='autosuggest' data-suggestion-source='tagSource' data-ng-model='tags' data-min-length='4'></mk-autocomplete>
 
 <h2>
 <a name="selectclass" class="anchor" href="#selectclass"><span class="octicon octicon-link"></span></a>selectClass</h2>
+    <p>You can specify a specific css class for the selected item. Here we'll change from the default of 'selected' to 'blueselected'</p>
+    <code>
+    &lt;mk-autocomplete id='autosuggest' data-suggestion-source='tagSource' data-ng-model='tags' data-select-class='blueselected'&gt;&lt;/mk-autocomplete&gt;
+    </code>
+    <mk-autocomplete id='autosuggest' data-suggestion-source='tagSource' data-ng-model='tags' data-select-class='blueselected'></mk-autocomplete>
 
-<p>Default is "selected" but you can pass in whatever you like.</p>
 
+    <strike><h2>
+<a name="onaccept---not-working-yet-still-todo" class="anchor" href="#onaccept---not-working-yet-still-todo"><span class="octicon octicon-link"></span></a>onAccept - not working yet, still todo</h2>
+
+<p>triggers when user does any of the accept actions: tab, enters multiple sep, hits down/up arrows and then enter.</p>
+</strike>
+
+<h2>
 <h1>
 <a name="use-this-however-you-want" class="anchor" href="#use-this-however-you-want"><span class="octicon octicon-link"></span></a>Use this however you want</h1>
 
 <p>This code is released into the great public domain. 
 If you make changes, please contribute them back. Don't be a jerk.</p>
+
+<p>I'm trying out test driven development on this and probably making a complete hash of it. Any help is greatly appreciated!</p>
       </section>
       <footer>
-        <p>This project is maintained by <a href="https://github.com/mattkatz">mattkatz</a></p>
+        <p>This project is maintained by <a href="http://www.morelightmorelight.com">Matt Katz</a></p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
