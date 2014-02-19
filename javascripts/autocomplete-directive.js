@@ -9,7 +9,7 @@ angular.module('autocomplete-directive',[])
     },
     replace: "true",//this breaks my find an input test
     template:
-      '<div class="autocomplete"><input placeholder="begin typing to get suggestions" data-ng-change="processChange()" data-ng-keypress="processKey($event)" data-ng-model="inputValue" autocomplete="off"/> '+
+      '<div class="autocomplete"><input placeholder="begin typing to get suggestions" data-ng-change="processChange()" data-ng-keypress="processKey($event)" data-ng-model="ngModel" autocomplete="off"/> '+
       '<ul  class="suggestions" ng-show="suggestions">'+
         '<li class="suggestion" data-ng-repeat="suggestion in suggestions" data-ng-class="suggestion == currentResult ? selectClass: null">{{suggestion}}</li>' +
       '</uL></div>',
@@ -21,11 +21,12 @@ angular.module('autocomplete-directive',[])
       scope.selectClass = attrs.selectClass ||'selected' ;
       scope.processChange = function(){
         scope.suggestions = [];
-        var q = scope.inputValue.trim();
+        //var q = scope.inputValue.trim();
+        var q = scope.ngModel.trim();
         if(scope.multiple){
           var multipleSepPos = q.lastIndexOf(scope.multipleSeparator);
           if(multipleSepPos != -1){
-            q = scope.inputValue.substr(multipleSepPos + scope.multipleSeparator.length).trim();
+            q = scope.ngModel.substr(multipleSepPos + scope.multipleSeparator.length).trim();
           }
         }
         if(q.length >= scope.minLength){
@@ -48,15 +49,15 @@ angular.module('autocomplete-directive',[])
         scope.currentResult = scope.getCurrentResult();
         if(scope.currentResult){
           if(scope.multiple){
-            if(scope.inputValue.indexOf(scope.multipleSeparator) != -1){
-              currentVal = scope.inputValue.substr(0,(scope.inputValue.lastIndexOf(scope.multipleSeparator) + scope.multipleSeparator.length));
+            if(scope.ngModel.indexOf(scope.multipleSeparator) != -1){
+              currentVal = scope.ngModel.substr(0,(scope.ngModel.lastIndexOf(scope.multipleSeparator) + scope.multipleSeparator.length));
             }else{
               currentVal = "";
             }
-            scope.inputValue = currentVal + scope.currentResult + scope.multipleSeparator;
+            scope.ngModel = currentVal + scope.currentResult + scope.multipleSeparator;
             //TODO focus the input box
           } else {
-            scope.inputValue = scope.currentResult;
+            scope.ngModel = scope.currentResult;
           }
           scope.suggestions = [];
           scope.currentResult = null;
