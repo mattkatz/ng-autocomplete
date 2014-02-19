@@ -7,6 +7,9 @@
 
     <link rel="stylesheet" href="stylesheets/styles.css">
      <style type='text/css'>
+       h1,h2,h3 {
+         padding-top: 2em;
+       }
       .selected {
         background:#F0F0B8;
       }
@@ -74,7 +77,8 @@ Try typing 'po' or 'lo' into this example. Use the arrow keys to go up or down, 
 <h2> <a name="ng-model" class="anchor" href="#ng-model"><span class="octicon octicon-link">ng-model</span></a></h2>
 
 <p>Stores accepted suggestions in ng-model. Right now it's just connected as a string, you have to parse things into an array if that's what you want. </p>
-<div ng-show="tags">Now your ng-model contains <span>{{tags}}</span></div>
+<div ng-show="tags">Now your ng-model contains <code>{{tags}}</code></div>
+<div ng-hide="tags">Now your ng-model is empty</div>
 
 <h2><a name="suggestionsource" class="anchor" href="#suggestionsource"><span class="octicon octicon-link">suggestionSource</span></a></h2>
 
@@ -122,6 +126,7 @@ Try typing 'po' or 'lo' into this example. Use the arrow keys to go up or down, 
 
 <p>This code is released into the great public domain. 
 If you make changes, please contribute them back. Don't be a jerk.</p>
+<p>Provided without warranty but with source, so you're responsible for fixing or improving what you want</a>
 
 <p>I'm trying out test driven development on this and probably making a complete hash of it. Any help is greatly appreciated!</p>
       </section>
